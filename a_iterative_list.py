@@ -131,4 +131,3 @@ def getElementAtIndex(list: List, index: int) -> Node:
 def clear(list: List) -> List:
     list.head = None
     return list
-

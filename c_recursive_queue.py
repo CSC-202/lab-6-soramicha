@@ -33,24 +33,59 @@ class Queue:
 
 
 def initialize() -> Queue:
-    raise NotImplementedError("Queue.initialize() not defined")
+    return Queue()
+    # raise NotImplementedError("Queue.initialize() not defined")
 
 
 def isEmpty(data: Queue) -> bool:
-    raise NotImplementedError("Queue.isEmpty() not defined")
+    return data.first == None
+    # raise NotImplementedError("Queue.isEmpty() not defined")
 
 
+# add node to the back
 def enqueue(data: Queue, value: int) -> Queue:
-    raise NotImplementedError("Queue.enqueue() not defined")
+    def helper(current: Node):
+        # base case #1 if there's nothing in the list
+        if current is None:
+            data.first = Node(value, None) # can use value var because it's inside the main function
+            return data
+        # base case #2 if the next node points to None
+        if current.next is None:
+            current.next = Node(value, None)
+            return data
+        
+        # loop until you get through all the nodes in the list
+        helper(current.next)
+        
+    # if there are nodes in the list already, loop through all the nodes
+    helper(data.first)
+    
+    return data
+    # raise NotImplementedError("Queue.enqueue() not defined")
 
 
+# return the front of the node and then the rest of it
 def dequeue(data: Queue) -> tuple[Node, Queue]:
-    raise NotImplementedError("Queue.dequeue() not defined")
+    newnode = data.first
+    data.first = data.first.next
+    
+    # return as tuple
+    return [newnode, data]
+    # raise NotImplementedError("Queue.dequeue() not defined")
 
 
 def peek(data: Queue) -> Node:
-    raise NotImplementedError("Queue.peek() not defined")
+    return Node(data.first.value, None)
+    # raise NotImplementedError("Queue.peek() not defined")
 
 
 def clear(data: Queue) -> Queue:
-    raise NotImplementedError("Queue.clear() not defined")
+    data.first = None
+    return data
+    # raise NotImplementedError("Queue.clear() not defined")
+    
+    
+"""l = initialize()
+l = enqueue(l, 5)
+l = enqueue(l, 432)
+print(Queue.toPythonList(l))"""
